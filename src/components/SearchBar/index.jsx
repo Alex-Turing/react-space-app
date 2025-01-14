@@ -33,7 +33,7 @@ const StyledIcon = styled.img`
 const SearchBar = () => {
     return (
     <StyledSearchBarContainer >
-        <StyledTextInput type="text" placeholder="Que estas buscando?"/>
+        <StyledTextInput type="text" placeholder="Search"/>
         <StyledIcon src={search} alt="Search icon" />
     </StyledSearchBarContainer>
     );

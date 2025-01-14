@@ -5,6 +5,7 @@ const StyledList = styled.ul`
     list-style: none;
     padding: 0;
     margin: 0;
+    width: 236px;
 `;
 
 const Nav = styled.nav``;
