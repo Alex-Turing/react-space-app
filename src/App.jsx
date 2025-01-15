@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { GlobalStyles } from "./components/GlobalStyles";
 import Header from "./components/Header";
@@ -6,9 +6,9 @@ import Navbar from "./components/Navbar";
 import Banner from "./components/Banner";
 import banner from './assets/banner.png';
 import Gallery from "./components/Gallery";
-import fotos from './fotos.json';
 import ModalZoom from "./components/ModalZoom";
 import Footer from "./components/Footer";
+import LoadingGallery from "./components/LoadingGalleryImage";
 
 const GradientBackground = styled.div`
   background: linear-gradient(175deg, #041833 4.16%, #04244f 48%, #154580 96.76%);
@@ -35,7 +35,7 @@ const GalleryContainer = styled.section`
 
 const App = () => {
   
-  const [galleryPhotos, setGalleryPhotos] = useState(fotos);
+  const [galleryPhotos, setGalleryPhotos] = useState([]);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [query, setQuery] = useState('');
   
@@ -54,6 +54,16 @@ const App = () => {
     }))
   }; 
 
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetch('http://localhost:3001/photos');
+      const data = await response.json();
+      setGalleryPhotos([...data]);
+    };
+
+    setTimeout(() => getData(), 3000); //setTimeout() simula una demora de 3 segundos en la carga de datos, solo para propositos de simulacion
+  }, []);
+
   return (
     <>
       <GradientBackground>
@@ -64,12 +74,15 @@ const App = () => {
             <Navbar />
             <GalleryContainer>
               <Banner text="The most comprehensive gallery of space images" backgroundImage={banner} />
-              <Gallery 
-                isPhotoSelected={photo => setSelectedPhoto(photo)} 
-                photos={galleryPhotos} 
-                switchFavoriteValue={switchFavoriteValue}
-                query={query}
-              />
+              {galleryPhotos.length == 0 ?  
+                <LoadingGallery /> :
+                <Gallery 
+                  isPhotoSelected={photo => setSelectedPhoto(photo)} 
+                  photos={galleryPhotos} 
+                  switchFavoriteValue={switchFavoriteValue}
+                  query={query}
+                />
+              }
             </GalleryContainer>
           </MainContainer>
         </AppContainer>
