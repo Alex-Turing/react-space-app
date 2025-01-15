@@ -8,6 +8,7 @@ import banner from './assets/banner.png';
 import Gallery from "./components/Gallery";
 import fotos from './fotos.json';
 import ModalZoom from "./components/ModalZoom";
+import Footer from "./components/Footer";
 
 const GradientBackground = styled.div`
   background: linear-gradient(175deg, #041833 4.16%, #04244f 48%, #154580 96.76%);
@@ -75,6 +76,7 @@ const App = () => {
           whenClose={ () => setSelectedPhoto(null) } 
           switchFavoriteValue={switchFavoriteValue}
         />
+        <Footer />
       </GradientBackground>
     </>
   )
