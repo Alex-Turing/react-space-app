@@ -21,7 +21,7 @@ const ImageContainer = styled.section`
 `;
 
 const Gallery = (props) => {
-    const { photos=[], isPhotoSelected, switchFavoriteValue } = props;
+    const { photos=[], isPhotoSelected, switchFavoriteValue, query } = props;
     return (
         <>
             <Tag />
@@ -29,7 +29,9 @@ const Gallery = (props) => {
                 <FlexSection>
                     <Title>Browse the Gallery</Title>
                     <ImageContainer>
-                        {photos.map(photo => 
+                        {photos.filter(photo => {
+                            return query == '' || photo.titulo.toLowerCase().includes(query.toLowerCase())
+                        }).map(photo => 
                             <Image 
                                 switchFavoriteValue={switchFavoriteValue}
                                 zoomRequested={isPhotoSelected}

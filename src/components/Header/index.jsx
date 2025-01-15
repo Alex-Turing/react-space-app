@@ -13,11 +13,11 @@ const StyledLogo = styled.img`
     width: 212px;
 `;
 
-const Header = () => {
+const Header = ({setQuery}) => {
     return (
     <StyledHeader>
         <StyledLogo src={logo} alt="logo space app" />
-        <SearchBar />
+        <SearchBar setQuery={setQuery}/>
     </StyledHeader>
     )
 };

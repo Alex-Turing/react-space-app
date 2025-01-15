@@ -37,6 +37,7 @@ const App = () => {
   
   const [galleryPhotos, setGalleryPhotos] = useState(fotos);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [query, setQuery] = useState('');
   
   const switchFavoriteValue = (photo) => {
     if(photo.id === selectedPhoto?.id){
@@ -58,7 +59,7 @@ const App = () => {
       <GradientBackground>
         <GlobalStyles />
         <AppContainer> 
-          <Header />
+          <Header setQuery={setQuery}/>
           <MainContainer>
             <Navbar />
             <GalleryContainer>
@@ -67,6 +68,7 @@ const App = () => {
                 isPhotoSelected={photo => setSelectedPhoto(photo)} 
                 photos={galleryPhotos} 
                 switchFavoriteValue={switchFavoriteValue}
+                query={query}
               />
             </GalleryContainer>
           </MainContainer>

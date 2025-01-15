@@ -30,10 +30,10 @@ const StyledIcon = styled.img`
     height: 38px;
 `;
 
-const SearchBar = () => {
+const SearchBar = ({setQuery}) => {
     return (
     <StyledSearchBarContainer >
-        <StyledTextInput type="text" placeholder="Search"/>
+        <StyledTextInput type="text" placeholder="Search" onChange={ (e) =>setQuery(e.target.value) }/>
         <StyledIcon src={search} alt="Search icon" />
     </StyledSearchBarContainer>
     );
