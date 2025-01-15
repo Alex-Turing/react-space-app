@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Title from "../Title";
 import Tag from "./Tags";
 import Popular from "./Popular";
+import Image from "./Image";
 
 const GalleryGrid = styled.div`
     display: flex;
@@ -11,13 +12,32 @@ const FlexSection = styled.section`
     flex-grow: 1;
 `;
 
-const Gallery = () => {
+const ImageContainer = styled.section`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 24px;
+`;
+
+const Gallery = (props) => {
+    const { photos=[], isPhotoSelected, switchFavoriteValue } = props;
     return (
         <>
             <Tag />
             <GalleryGrid>
                 <FlexSection>
                     <Title>Browse the Gallery</Title>
+                    <ImageContainer>
+                        {photos.map(photo => 
+                            <Image 
+                                switchFavoriteValue={switchFavoriteValue}
+                                zoomRequested={isPhotoSelected}
+                                key={photo.id}
+                                photo={photo}
+                            />
+                        )}
+                    </ImageContainer>
                 </FlexSection>
                 <Popular>
 

@@ -4,36 +4,33 @@ import Button from '../Button';
 
 const TagContainer = styled.section`
     display: flex;
-    flex-direction: row;
     align-items: center;
+    gap: 64px;
+    margin-top: 56px;
 `;
 
 const ButtonContainer = styled.div`
-    margin: 50px 0;
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    gap: 10px;
+    justify-content: end;
+    gap: 24px;
 `;
 
-const TextContainer = styled.div`
-    width: 20%;
+const TagTitle = styled.h3`
+    margin: 0;
     font-size: 24px;
     color: #d9d9d9;
 `;
 
 const Tag = () => {
     return (
-        <>
-        
-        <ButtonContainer>
-            <TextContainer>Search By Tag:</TextContainer>
-            {tags.map(tag => {
-                return <Button type="button" key={tag.id} buttonText={tag.titulo}></Button>
-            })}
-        </ButtonContainer>
-            
-        </>
+        <TagContainer>
+            <TagTitle>Search By Tag:</TagTitle>
+            <ButtonContainer>
+                {tags.map(tag => {
+                    return <Button key={tag.id} buttonText={tag.titulo}></Button>
+                })}
+            </ButtonContainer>
+        </TagContainer>
     );
 };
 
