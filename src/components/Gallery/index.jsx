@@ -30,7 +30,8 @@ const Gallery = (props) => {
                     <Title>Browse the Gallery</Title>
                     <ImageContainer>
                         {photos.filter(photo => {
-                            return query == '' || photo.titulo.toLowerCase().includes(query.toLowerCase())
+                            return query == '' || photo.titulo.toLocaleLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu,"")
+                                .includes(query.toLocaleLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu,"")) // toLocaleLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu,"") elimina los acentos (como tildes)
                         }).map(photo => 
                             <Image 
                                 switchFavoriteValue={switchFavoriteValue}

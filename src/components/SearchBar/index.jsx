@@ -1,3 +1,4 @@
+import {useRef} from 'react';
 import styled from "styled-components";
 import search from './search.png'
 
@@ -31,10 +32,13 @@ const StyledIcon = styled.img`
 `;
 
 const SearchBar = ({setQuery}) => {
+    const queryBox = useRef(null);
     return (
     <StyledSearchBarContainer >
-        <StyledTextInput type="text" placeholder="Search" onChange={ (e) =>setQuery(e.target.value) }/>
-        <StyledIcon src={search} alt="Search icon" />
+        <StyledTextInput ref={queryBox} type="text" placeholder="Search" />
+        <StyledIcon src={search} alt="Search icon" onClick={ () => {
+            setQuery(queryBox.current.value)
+        } }/>
     </StyledSearchBarContainer>
     );
 };
