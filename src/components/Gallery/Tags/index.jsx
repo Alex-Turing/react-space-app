@@ -26,9 +26,7 @@ const Tag = () => {
         <TagContainer>
             <TagTitle>Search By Tag:</TagTitle>
             <ButtonContainer>
-                {tags.map(tag => {
-                    return <Button key={tag.id} buttonText={tag.titulo}></Button>
-                })}
+                {tags.map(tag => <Button key={tag.id} buttonText={tag.titulo}></Button>)}
             </ButtonContainer>
         </TagContainer>
     );
