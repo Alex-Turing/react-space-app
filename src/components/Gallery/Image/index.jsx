@@ -2,6 +2,7 @@ import styled from "styled-components";
 import IconButton from "../../IconButton";
 import { useContext } from "react";
 import { GlobalContext } from "../../../context/GlobalContext";
+import useModalPhoto from "../../../hooks/useModalPhoto";
 
 const StyledFigure = styled.figure`
     width: ${props => props.$expanded ? '90%' : '370px' };
@@ -43,6 +44,7 @@ const Image = (props) => {
 
     const { photo, expanded=false } = props;
     const { dispatch } = useContext(GlobalContext);
+    const { openModal } = useModalPhoto();
     const favoriteIcon = photo.favorite ? "icons/favorite-active.png" : "icons/favorite.png";
 
     return (
@@ -56,7 +58,7 @@ const Image = (props) => {
                         <IconButton onClick={() => dispatch({type: 'SWITCH_FAVORITE', payload: photo})}>
                             <img src={favoriteIcon} alt="favorite icon" />
                         </IconButton>
-                        {!expanded && <IconButton aria-hidden={expanded} onClick={() => dispatch({type: 'SET_SELECTED_PHOTO', payload: photo})}>
+                        {!expanded && <IconButton aria-hidden={expanded} onClick={() => openModal(photo)}>
                             <img src="icons/expand.png" alt="expand icon" />
                         </IconButton>}
                     </StyledFooter>

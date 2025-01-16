@@ -10,6 +10,7 @@ const initialState = {
     query: '',
     galleryPhotos: [],
     selectedPhoto: null,
+    isModalOpen: false,
 };
 
 const reducer = (state, action) => {
@@ -19,7 +20,10 @@ const reducer = (state, action) => {
         case 'SET_GALLERY_PHOTOS':
             return {...state, galleryPhotos: action.payload};
         case 'SET_SELECTED_PHOTO':
-            return {...state, selectedPhoto: action.payload};
+            return {...state, 
+                selectedPhoto: action.payload,
+                isModalOpen: action.payload !== null ? true : false
+            };
         case 'SWITCH_FAVORITE':
 
             const galleryPhotos = state.galleryPhotos.map(galleryPhoto => {

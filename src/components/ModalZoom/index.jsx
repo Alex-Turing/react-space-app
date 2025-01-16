@@ -3,6 +3,7 @@ import Image from "../Gallery/Image";
 import IconButton from "../IconButton";
 import { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
+import useModalPhoto from "../../hooks/useModalPhoto";
 
 const StyledOverlay = styled.div`
     background: rgba(0, 0, 0, 0.7);
@@ -40,14 +41,15 @@ const StyledDialog = styled.dialog`
 `;
 
 const ModalZoom = () => {
-    const { state, dispatch } = useContext(GlobalContext);
+    const { isModalOpen, selectedPhoto, closeModal } = useModalPhoto();
+    
     return (
         <>
-            {state.selectedPhoto && <>
+            {isModalOpen && <>
                 <StyledOverlay />
-                <StyledDialog open={!!state.selectedPhoto} onClose={() => dispatch({type: 'SET_SELECTED_PHOTO', payload: null})}>
+                <StyledDialog open={!!selectedPhoto} onClose={() => closeModal()}>
                     <StyledDialogContent>
-                        <Image photo={state.selectedPhoto} expanded={true} />
+                        <Image photo={selectedPhoto} expanded={true} />
                         <form method="dialog">
                             <IconButton>
                                 <img src="icons/close.png" alt="close icon" />
