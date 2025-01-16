@@ -37,7 +37,6 @@ const App = () => {
   
   const [galleryPhotos, setGalleryPhotos] = useState([]);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [query, setQuery] = useState('');
   
   const switchFavoriteValue = (photo) => {
     if(photo.id === selectedPhoto?.id){
