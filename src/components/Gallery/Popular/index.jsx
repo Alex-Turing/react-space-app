@@ -1,6 +1,6 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Title from "../../Title";
-import { useState, useEffect } from 'react';
 import LoadingGallery from '../../LoadingGalleryImage';
 
 const StyledSectionContainer = styled.section`

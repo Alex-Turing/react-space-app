@@ -29,6 +29,7 @@ const StyledIcon = styled.img`
     right: 10px;
     width: 38px !important;
     height: 38px;
+    cursor: pointer;
 `;
 
 const SearchBar = ({setQuery}) => {

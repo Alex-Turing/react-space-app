@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const StyledLoadingContainer = styled.div`
     display: flex;
+    margin: 30px 0;
     justify-content: center;
 `;
 
