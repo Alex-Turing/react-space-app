@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import IconButton from "../../IconButton";
+import { useContext } from "react";
+import { GlobalContext } from "../../../context/GlobalContext";
 
 const StyledFigure = styled.figure`
     width: ${props => props.$expanded ? '90%' : '370px' };
@@ -39,7 +41,8 @@ const StyledFooter = styled.footer`
 
 const Image = (props) => {
 
-    const { photo, expanded=false, zoomRequested, switchFavoriteValue } = props;
+    const { photo, expanded=false } = props;
+    const { dispatch } = useContext(GlobalContext);
     const favoriteIcon = photo.favorite ? "icons/favorite-active.png" : "icons/favorite.png";
 
     return (
@@ -50,10 +53,10 @@ const Image = (props) => {
                 <h3>{photo.titulo}</h3>
                     <StyledFooter>
                         <h4>{photo.fuente}</h4>
-                        <IconButton onClick={() => switchFavoriteValue(photo)}>
+                        <IconButton onClick={() => dispatch({type: 'SWITCH_FAVORITE', payload: photo})}>
                             <img src={favoriteIcon} alt="favorite icon" />
                         </IconButton>
-                        {!expanded && <IconButton aria-hidden={expanded} onClick={() => zoomRequested(photo)}>
+                        {!expanded && <IconButton aria-hidden={expanded} onClick={() => dispatch({type: 'SET_SELECTED_PHOTO', payload: photo})}>
                             <img src="icons/expand.png" alt="expand icon" />
                         </IconButton>}
                     </StyledFooter>

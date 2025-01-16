@@ -1,6 +1,7 @@
-import {useRef} from 'react';
+import {useContext, useRef} from 'react';
 import styled from "styled-components";
 import search from './search.png'
+import { GlobalContext } from '../../context/GlobalContext';
 
 const StyledSearchBarContainer = styled.div`
     position: relative;
@@ -32,14 +33,16 @@ const StyledIcon = styled.img`
     cursor: pointer;
 `;
 
-const SearchBar = ({setQuery}) => {
+const SearchBar = () => {
     const queryBox = useRef(null);
+    const { dispatch } = useContext(GlobalContext);
     return (
     <StyledSearchBarContainer >
         <StyledTextInput ref={queryBox} type="text" placeholder="Search" />
         <StyledIcon src={search} alt="Search icon" onClick={ () => {
-            setQuery(queryBox.current.value)
-        } }/>
+            dispatch({type: 'SET_QUERY', payload: queryBox.current.value});
+            }} 
+        />
     </StyledSearchBarContainer>
     );
 };

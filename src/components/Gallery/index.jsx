@@ -3,6 +3,9 @@ import Title from "../Title";
 import Tag from "./Tags";
 import Popular from "./Popular";
 import Image from "./Image";
+import { useContext } from "react";
+import { GlobalContext } from "../../context/GlobalContext";
+import LoadingGallery from "../LoadingGalleryImage";
 
 const GalleryGrid = styled.div`
     display: flex;
@@ -20,22 +23,21 @@ const ImageContainer = styled.section`
     gap: 24px;
 `;
 
-const Gallery = (props) => {
-    const { photos=[], isPhotoSelected, switchFavoriteValue, query } = props;
+const Gallery = () => {
+    const { state } = useContext(GlobalContext);
     return (
+        state.galleryPhotos.length == 0 ? <LoadingGallery />  :
         <>
             <Tag />
             <GalleryGrid>
                 <FlexSection>
                     <Title>Browse the Gallery</Title>
                     <ImageContainer>
-                        {photos.filter(photo => {
-                            return query == '' || photo.titulo.toLocaleLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu,"")
-                                .includes(query.toLocaleLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu,"")) // toLocaleLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu,"") elimina los acentos (como tildes)
+                        {state.galleryPhotos.filter(photo => {
+                            return state.query == '' || photo.titulo.toLocaleLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu,"")
+                                .includes(state.query.toLocaleLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu,"")) // toLocaleLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu,"") elimina los acentos (como tildes)
                         }).map(photo => 
                             <Image 
-                                switchFavoriteValue={switchFavoriteValue}
-                                zoomRequested={isPhotoSelected}
                                 key={photo.id}
                                 photo={photo}
                             />

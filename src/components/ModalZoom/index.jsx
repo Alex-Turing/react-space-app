@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Image from "../Gallery/Image";
 import IconButton from "../IconButton";
+import { useContext } from "react";
+import { GlobalContext } from "../../context/GlobalContext";
 
 const StyledOverlay = styled.div`
     background: rgba(0, 0, 0, 0.7);
@@ -37,15 +39,15 @@ const StyledDialog = styled.dialog`
     }
 `;
 
-const ModalZoom = (props) => {
-    const { photo, whenClose, switchFavoriteValue } = props;
+const ModalZoom = () => {
+    const { state, dispatch } = useContext(GlobalContext);
     return (
         <>
-            {photo && <>
+            {state.selectedPhoto && <>
                 <StyledOverlay />
-                <StyledDialog open={!!photo} onClose={whenClose}>
+                <StyledDialog open={!!state.selectedPhoto} onClose={() => dispatch({type: 'SET_SELECTED_PHOTO', payload: null})}>
                     <StyledDialogContent>
-                        <Image photo={photo} expanded={true} switchFavoriteValue={switchFavoriteValue}/>
+                        <Image photo={state.selectedPhoto} expanded={true} />
                         <form method="dialog">
                             <IconButton>
                                 <img src="icons/close.png" alt="close icon" />
